@@ -34,7 +34,7 @@ public class Client {
 
     }
 
-    public boolean insertInDataBase ( String uName, String userPassword ) {
+    private boolean insertInDataBase ( String uName, String userPassword ) {
         boolean isInserted = false ;
 
         final String URL = "jdbc:postgresql://idc.cluster-custom-cjcsijnttbb2.eu-central-1.rds.amazonaws.com:5432/AZadic";
@@ -56,7 +56,7 @@ public class Client {
         return isInserted ;
     }
 
-    public boolean isInDataBase ( String uName, String uPass ) {
+    private boolean isInDataBase ( String uName, String uPass ) {
         boolean isInDataBase = false ;
 
         /*Connect to database... */
