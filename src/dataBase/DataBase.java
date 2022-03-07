@@ -9,7 +9,7 @@ public class DataBase {
 
         final String URL = "jdbc:postgresql://idc.cluster-custom-cjcsijnttbb2.eu-central-1.rds.amazonaws.com:5432/AZadic";
         final String USERNAME = "ftuser" ;
-        final String PASSWORD = "FastTrack&2022" ;
+        final String PASSWORD = "********" ;
         try {
             Connection myConnection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
             PreparedStatement preparedStatement = myConnection.prepareStatement("INSERT INTO users(username,userpassword) VALUES (?,?)") ;
@@ -32,7 +32,7 @@ public class DataBase {
         /*Connect to database... */
         final String URL = "jdbc:postgresql://idc.cluster-custom-cjcsijnttbb2.eu-central-1.rds.amazonaws.com:5432/AZadic";
         final String USERNAME = "ftuser" ;
-        final String PASSWORD = "FastTrack&2022" ;
+        final String PASSWORD = "*******" ;
         try {
             Connection myConn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
