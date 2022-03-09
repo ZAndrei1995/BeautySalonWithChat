@@ -4,6 +4,10 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 import dataBase.DataBase ;
+import logIn_RegisterSystem.LoginSystem ;
+import logIn_RegisterSystem.RegisterSystem;
+
+import static java.lang.System.exit;
 
 
 public class Client {
@@ -23,13 +27,6 @@ public class Client {
             if ( new DataBase().isInDataBase(username,userPassword) ) {
                 this.userName = username;
                 this.userPassword = userPassword;
-            }else {
-                System.out.println("Client.Client is not registered in database!");
-                System.out.println("You'll be registered!");
-                if ( new DataBase().insertInDataBase(username, userPassword) ) {
-                    System.out.println("Client.Client registered succesfuly!");
-                    System.exit(0);
-                }
             }
         }catch (IOException e) {
             closeEverythings(socket, bufferedReader, bufferedWriter) ;
@@ -96,18 +93,40 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
 
-        Scanner scanner = new Scanner(System.in) ;
-        System.out.println("Enter your username for the group chat: ");
-        String username = scanner.nextLine();
+        do {
+            int cchoice = 0;
+            String choice ;
+            System.out.println("1. Log-in to chat.");
+            System.out.println("2. Register in database.");
+            System.out.println("3. Salon scheduling.");
+            System.out.println("4. Exit.");
+            System.out.println();
 
-        Scanner scannerr = new Scanner(System.in) ;
-        System.out.println("Password: ");
-        String userpass = scannerr.nextLine();
+            System.out.println("Choose an option: ");
+            Scanner myScanner = new Scanner(System.in) ;
+            choice = myScanner.nextLine() ;
 
-        Socket socket = new Socket("localhost", 1234);
-        Client client = new Client ( socket, username, userpass) ;
-        client.listenForMessages();
-        client.sendMessages();
+            try {
+                cchoice = Integer.parseInt(choice) ;
+            }catch(NumberFormatException e ) {
+                System.out.println("Not a number!");
+            }
+
+            switch (cchoice) {
+                case 1:
+                    new LoginSystem().logInSystem();
+                    break ;
+                case 2:
+                    new RegisterSystem().registerInDataBase() ;
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    exit(1) ;
+
+            }
+
+        }while(true) ;
 
     }
 

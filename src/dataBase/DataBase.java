@@ -4,23 +4,26 @@ import java.sql.*;
 
 public class DataBase {
 
-    public boolean insertInDataBase ( String uName, String userPassword ) {
+    public boolean insertInDataBase ( String uName, String userPassword, String uEmail) {
         boolean isInserted = false ;
 
         final String URL = "jdbc:postgresql://idc.cluster-custom-cjcsijnttbb2.eu-central-1.rds.amazonaws.com:5432/AZadic";
         final String USERNAME = "ftuser" ;
-        final String PASSWORD = "********" ;
+        final String PASSWORD = "*******" ;
         try {
             Connection myConnection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-            PreparedStatement preparedStatement = myConnection.prepareStatement("INSERT INTO users(username,userpassword) VALUES (?,?)") ;
+            PreparedStatement preparedStatement = myConnection.prepareStatement("INSERT INTO users(username,userpassword,e_mail) VALUES (?,?,?)") ;
             preparedStatement.setString(1,uName);
             preparedStatement.setString(2,userPassword);
+            preparedStatement.setString(3,uEmail);
+
+
             int updateValuesOfDB = preparedStatement.executeUpdate() ;
             System.out.println(updateValuesOfDB);
             preparedStatement.close();
             myConnection.close();
         }catch(SQLException e ) {
-            System.out.println("You already have one in database!");
+            System.out.println(e.getMessage());
         }
 
         return isInserted ;
