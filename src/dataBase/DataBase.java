@@ -4,19 +4,20 @@ import java.sql.*;
 
 public class DataBase {
 
-    public boolean insertInDataBase ( String uName, String userPassword, String uEmail) {
+    public boolean insertInDataBase ( String uName, String userPassword, String uEmail, String originalName, String originalSurname) {
         boolean isInserted = false ;
 
         final String URL = "jdbc:postgresql://idc.cluster-custom-cjcsijnttbb2.eu-central-1.rds.amazonaws.com:5432/AZadic";
         final String USERNAME = "ftuser" ;
-        final String PASSWORD = "*******" ;
+        final String PASSWORD = "********" ;
         try {
             Connection myConnection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-            PreparedStatement preparedStatement = myConnection.prepareStatement("INSERT INTO users(username,userpassword,e_mail) VALUES (?,?,?)") ;
+            PreparedStatement preparedStatement = myConnection.prepareStatement("INSERT INTO users(username,userpassword,e_mail,name,surname) VALUES (?,?,?,?,?)") ;
             preparedStatement.setString(1,uName);
             preparedStatement.setString(2,userPassword);
             preparedStatement.setString(3,uEmail);
-
+            preparedStatement.setString(4,originalName);
+            preparedStatement.setString(5,originalSurname);
 
             int updateValuesOfDB = preparedStatement.executeUpdate() ;
             System.out.println(updateValuesOfDB);
@@ -35,7 +36,7 @@ public class DataBase {
         /*Connect to database... */
         final String URL = "jdbc:postgresql://idc.cluster-custom-cjcsijnttbb2.eu-central-1.rds.amazonaws.com:5432/AZadic";
         final String USERNAME = "ftuser" ;
-        final String PASSWORD = "*******" ;
+        final String PASSWORD = "********" ;
         try {
             Connection myConn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 

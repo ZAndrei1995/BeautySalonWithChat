@@ -1,6 +1,7 @@
 package logIn_RegisterSystem;
 
 import dataBase.DataBase;
+
 import java.util.Scanner;
 
 public class RegisterSystem {
@@ -9,6 +10,8 @@ public class RegisterSystem {
         String uName;
         String uPassword;
         String uEmail;
+        String uOriginalName;
+        String uOriginalSurname ;
 
         System.out.println("Welcome, register yourself into the app!");
 
@@ -24,7 +27,15 @@ public class RegisterSystem {
         System.out.println("Enter your email: ");
         uEmail = emailScanner.nextLine() ;
 
-        if ( new DataBase().insertInDataBase(uName, uPassword, uEmail) ) {
+        Scanner uOriginalN = new Scanner(System.in) ;
+        System.out.println("Introduce your name: ");
+        uOriginalName = uOriginalN.nextLine() ;
+
+        Scanner uOriginalS = new Scanner(System.in) ;
+        System.out.println("Introduce your surname: ");
+        uOriginalSurname = uOriginalS.nextLine();
+
+        if ( new DataBase().insertInDataBase(uName, uPassword, uEmail, uOriginalName, uOriginalSurname) ) {
             System.out.println("Added succesfuly");
         }
 
