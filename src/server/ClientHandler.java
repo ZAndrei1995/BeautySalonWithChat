@@ -3,6 +3,8 @@ package server;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ClientHandler implements  Runnable {
 
@@ -24,8 +26,6 @@ public class ClientHandler implements  Runnable {
             closeEverything(socket, bufferedReader, bufferedWriter) ;
         }
     }
-
-
 
     @Override
     public void run() {

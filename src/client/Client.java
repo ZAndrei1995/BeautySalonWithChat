@@ -6,6 +6,8 @@ import java.util.Scanner;
 import dataBase.DataBase ;
 import logIn_RegisterSystem.LoginSystem ;
 import logIn_RegisterSystem.RegisterSystem;
+import scheduling.CheckYourBooking;
+import scheduling.SchedulingSystem;
 
 import static java.lang.System.exit;
 
@@ -27,6 +29,10 @@ public class Client {
             if ( new DataBase().isInDataBase(username,userPassword) ) {
                 this.userName = username;
                 this.userPassword = userPassword;
+                System.out.println("Logged in successfully.");
+            }else {
+                System.out.println("Invalid user or password.");
+                System.out.println();
             }
         }catch (IOException e) {
             closeEverythings(socket, bufferedReader, bufferedWriter) ;
@@ -99,7 +105,8 @@ public class Client {
             System.out.println("1. Log-in to chat.");
             System.out.println("2. Register in database.");
             System.out.println("3. Salon scheduling.");
-            System.out.println("4. Exit.");
+            System.out.println("4. Check your booking to saloon.");
+            System.out.println("5. Exit.");
             System.out.println();
 
             System.out.println("Choose an option: ");
@@ -120,8 +127,12 @@ public class Client {
                     new RegisterSystem().registerInDataBase() ;
                     break;
                 case 3:
+                    new SchedulingSystem().setSchedulingDateForUser();
                     break;
                 case 4:
+                    new CheckYourBooking().checkYourBooking();
+                    break;
+                case 5:
                     exit(1) ;
 
             }
