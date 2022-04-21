@@ -49,14 +49,20 @@ public class SchedulingSystem {
 
         LocalDate setDate = LocalDate.of(userYear,userMonth,userDay);
         LocalDateTime localDateTime = setDate.atTime(userHour,userMin,0);
+        //todo
+        // nu lasa inainte sa faci un search in DB si sa faci compararea
+        boolean isEqual_ = new DataBase().searchInScheduleDateAndHour(setDate,localDateTime) ;
+        if ( isEqual_ ) {
 
-        boolean dataBase = new DataBase().insertScheduleDateAndHour(name,surname,setDate,localDateTime);
+            boolean dataBase = new DataBase().insertScheduleDateAndHour(name, surname, setDate, localDateTime);
 
-        if ( dataBase ) {
-            System.out.println("Added!");
+            if (dataBase) {
+                System.out.println("Added!");
+            }
+        }else {
+            System.out.println("You must change the date or time");
         }
 
     }
-
 
 }

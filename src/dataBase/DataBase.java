@@ -3,6 +3,7 @@ package dataBase;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class DataBase {
 
@@ -90,6 +91,41 @@ public class DataBase {
 
         return isInserted ;
 
+    }
+
+    public boolean searchInScheduleDateAndHour( LocalDate lDate, LocalDateTime lDTime ) {
+
+        boolean approval = false ;
+
+        final String URL = "jdbc:postgresql://localhost:5432/andrewdb";
+        final String USERNAME = "postgres" ;
+        final String PASSWORD = "Hawkeyestar123" ;
+
+        try {
+            Connection myConn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            /* Create a query */
+            Statement statement = myConn.createStatement();
+            /* Execute the query */
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM programaresalon ORDER BY id DESC LIMIT 1");
+            while ( resultSet.next()) {
+                LocalDate localDate = resultSet.getDate("dataprogramare").toLocalDate() ;
+                LocalTime localTime = resultSet.getTime("ora_programare").toLocalTime() ;
+
+                if ( lDate.equals(localDate)) {
+                    if ( localTime.isBefore(LocalTime.from(lDTime))) {
+                        approval = true ;
+                    }
+                }else{
+                    approval = false ;
+                }
+
+            }
+        }catch (SQLException e ) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+
+        return approval ;
     }
 
     public void displayCheckBooking(String name, String surname ) {

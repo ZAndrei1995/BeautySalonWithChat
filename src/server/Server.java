@@ -18,7 +18,8 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 System.out.println("Hey! A new member has connected!");
                 ClientHandler clientHandler = new ClientHandler(socket) ;
-
+                //Todo
+                //data ultimei programari >= 30 min
                 Thread thread = new Thread(clientHandler);
                 thread.start();
             }
