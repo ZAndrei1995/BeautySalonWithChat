@@ -1,4 +1,9 @@
-#ChatSystemWithDB is a project that will be updated everyday.
-Also it will have a GUI.
+Beauty Salon With Chat
 
-See ya soon!
+Autor - Zadic Andrei Rares
+
+Tehnologii utilizate : 
+- JDBC / PostgreSQL: pentru baza de date
+- Sockets: pentru Chat-System.
+
+In acest proiect utilizatorul poate sa se inregistreze, sa se logheze si sa se programeze la salonul de infrumusetare. 
